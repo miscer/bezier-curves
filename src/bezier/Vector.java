@@ -25,12 +25,32 @@ public class Vector {
         return new Vector(x, y);
     }
 
+    public double magnitude() {
+        return Math.sqrt(x * x + y * y);
+    }
+
     public Vector add(Vector other) {
         return new Vector(x + other.x, y + other.y);
     }
 
+    public Vector subtract(Vector other) {
+        return new Vector(x - other.x, y - other.y);
+    }
+
     public Vector multiply(double n) {
         return new Vector(x * n, y * n);
+    }
+
+    public Vector divide(double n) {
+        return new Vector(x / n, y / n);
+    }
+
+    public Vector unit() {
+        return divide(magnitude());
+    }
+
+    public double dot(Vector other) {
+        return x * other.x + y * other.y;
     }
 
     @Override

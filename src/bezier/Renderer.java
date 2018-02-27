@@ -1,27 +1,34 @@
 package bezier;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Renderer {
     public static void renderState(GraphicsContext context, State state) {
-        BezierCurve curve = state.getCurve();
+        renderCurve(context, state.getLight(), state.getCurve());
+        renderLight(context, state.getLight());
+    }
 
-        if (curve != null) {
-            renderCurve(context, curve);
+    public static void renderCurve(GraphicsContext context, Vector light, BezierCurve curve) {
+        for (int i = 0; i <= 30; i++) {
+            double u = (double) i / 30;
+            renderPoint(context, light, curve, u);
         }
     }
 
-    public static void renderCurve(GraphicsContext context, BezierCurve curve) {
-        Vector[] samples = curve.interpolate(30);
+    public static void renderPoint(GraphicsContext context, Vector light, BezierCurve curve, double u) {
+        Vector sample = curve.sample(u);
+        Vector normal = curve.normal(u).unit();
+        Vector ray = sample.subtract(light).unit();
 
-        Vector first = samples[0];
-        context.moveTo(first.getX(), first.getY());
+        double brightness = ray.dot(normal);
+        context.setFill(Color.gray(brightness));
 
-        for (int i = 1; i < samples.length; i++) {
-            Vector sample = samples[i];
-            context.lineTo(sample.getX(), sample.getY());
-        }
+        context.fillOval(sample.getX(), sample.getY(), 5, 5);
+    }
 
-        context.stroke();
+    public static void renderLight(GraphicsContext context, Vector light) {
+        context.setFill(Color.YELLOW);
+        context.fillOval(light.getX(), light.getY(), 10, 10);
     }
 }

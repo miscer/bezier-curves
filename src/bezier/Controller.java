@@ -16,8 +16,9 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         GraphicsContext context = canvas.getGraphicsContext2D();
 
-        BezierCurve curve = new BezierCurve(new Vector(10, 10), new Vector(200, 100), new Vector(250, 300));
-        State state = new State(curve);
+        BezierCurve curve = new BezierCurve(new Vector(10, 10), new Vector(300, 100), new Vector(250, 300));
+        Vector light = new Vector(400, 50);
+        State state = new State(curve, light);
 
         Renderer.renderState(context, state);
     }

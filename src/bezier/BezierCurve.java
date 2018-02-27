@@ -11,21 +11,6 @@ public class BezierCurve {
         this.p3 = p3;
     }
 
-    public Vector[] interpolate(int samples) {
-        if (samples <= 0) {
-            throw new IllegalArgumentException("Number of samples has to be greater than zero");
-        }
-
-        Vector[] results = new Vector[samples];
-
-        for (int i = 0; i < samples; i++) {
-            double u = (double) i / samples;
-            results[i] = sample(u);
-        }
-
-        return results;
-    }
-
     public Vector sample(double u) {
         // (1-u)^2 * p1 + 2u * (1-u) * p2 + u^2 * p3;
 
@@ -34,5 +19,20 @@ public class BezierCurve {
         Vector c = p3.multiply(Math.pow(u, 2));
 
         return a.add(b).add(c);
+    }
+
+    public Vector tangent(double u) {
+        // (2u - 2) * p1 + (2 - 4u) * p2 + 2u * p3
+
+        Vector a = p1.multiply(2 * u - 2);
+        Vector b = p2.multiply(2 - 4 * u);
+        Vector c = p3.multiply(2 * u);
+
+        return a.add(b).add(c);
+    }
+
+    public Vector normal(double u) {
+        Vector t = tangent(u);
+        return new Vector(-t.getY(), t.getX());
     }
 }
