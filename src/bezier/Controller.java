@@ -29,12 +29,7 @@ public class Controller implements Initializable {
 
         Renderer.render(context, state);
 
-        state.lightProperty().addListener((observable, oldValue, newValue) -> {
-            Renderer.clear(context);
-            Renderer.render(context, state);
-        });
-
-        state.samplesProperty().addListener((observable, oldValue, newValue) -> {
+        state.addListener((observable) -> {
             Renderer.clear(context);
             Renderer.render(context, state);
         });
