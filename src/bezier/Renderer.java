@@ -5,18 +5,23 @@ import javafx.scene.paint.Color;
 
 public class Renderer {
     public static void renderState(GraphicsContext context, State state) {
-        renderCurve(context, state.getLight(), state.getCurve());
-        renderLight(context, state.getLight());
+        renderCurve(context, state);
+        renderLight(context, state);
     }
 
-    public static void renderCurve(GraphicsContext context, Vector light, BezierCurve curve) {
-        for (int i = 0; i <= 30; i++) {
-            double u = (double) i / 30;
-            renderPoint(context, light, curve, u);
+    public static void renderCurve(GraphicsContext context, State state) {
+        int samples = state.samplesProperty().get();
+
+        for (int i = 0; i <= samples; i++) {
+            double u = (double) i / samples;
+            renderPoint(context, state, u);
         }
     }
 
-    public static void renderPoint(GraphicsContext context, Vector light, BezierCurve curve, double u) {
+    public static void renderPoint(GraphicsContext context, State state, double u) {
+        BezierCurve curve = state.curveProperty().get();
+        Vector light = state.lightProperty().get();
+
         Vector sample = curve.sample(u);
         Vector normal = curve.normal(u).unit();
         Vector ray = sample.subtract(light).unit();
@@ -27,7 +32,9 @@ public class Renderer {
         context.fillOval(sample.getX(), sample.getY(), 5, 5);
     }
 
-    public static void renderLight(GraphicsContext context, Vector light) {
+    public static void renderLight(GraphicsContext context, State state) {
+        Vector light = state.lightProperty().get();
+
         context.setFill(Color.YELLOW);
         context.fillOval(light.getX(), light.getY(), 10, 10);
     }

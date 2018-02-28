@@ -1,19 +1,24 @@
 package bezier;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 public class State {
-    private BezierCurve curve;
-    private Vector light;
+    private ObjectProperty<BezierCurve> curve = new SimpleObjectProperty<>();
+    private ObjectProperty<Vector> light = new SimpleObjectProperty<>();
+    private IntegerProperty samples = new SimpleIntegerProperty(30);
 
-    public State(BezierCurve curve, Vector light) {
-        this.curve = curve;
-        this.light = light;
-    }
-
-    public BezierCurve getCurve() {
+    public ObjectProperty<BezierCurve> curveProperty() {
         return curve;
     }
 
-    public Vector getLight() {
+    public ObjectProperty<Vector> lightProperty() {
         return light;
+    }
+
+    public IntegerProperty samplesProperty() {
+        return samples;
     }
 }

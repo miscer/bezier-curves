@@ -18,7 +18,10 @@ public class Controller implements Initializable {
 
         BezierCurve curve = new BezierCurve(new Vector(20, 300), new Vector(300, -300), new Vector(580, 300));
         Vector light = new Vector(550, 150);
-        State state = new State(curve, light);
+
+        State state = new State();
+        state.curveProperty().set(curve);
+        state.lightProperty().set(light);
 
         Renderer.renderState(context, state);
     }
