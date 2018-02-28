@@ -3,6 +3,7 @@ package bezier;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -11,6 +12,9 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     public Canvas canvas;
+    public Slider samples;
+
+    private State state = new State();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -19,11 +23,16 @@ public class Controller implements Initializable {
         BezierCurve curve = new BezierCurve(new Vector(20, 300), new Vector(300, -300), new Vector(580, 300));
         Vector light = new Vector(550, 150);
 
-        State state = new State();
         state.curveProperty().set(curve);
         state.lightProperty().set(light);
+        state.samplesProperty().bind(samples.valueProperty());
 
-        Renderer.renderState(context, state);
+        Renderer.render(context, state);
+
+        state.samplesProperty().addListener((observable, oldValue, newValue) -> {
+            Renderer.clear(context);
+            Renderer.render(context, state);
+        });
     }
 
     public void onMouseClicked(MouseEvent mouseEvent) {

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -10,6 +11,7 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <Button mnemonicParsing="false" text="Button" />
+            <Slider fx:id="samples" blockIncrement="1.0" majorTickUnit="100.0" max="300.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" value="30.0" />
         </items>
       </ToolBar>
    </top>
