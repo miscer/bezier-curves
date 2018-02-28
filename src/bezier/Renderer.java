@@ -21,7 +21,7 @@ public class Renderer {
         Vector normal = curve.normal(u).unit();
         Vector ray = sample.subtract(light).unit();
 
-        double brightness = ray.dot(normal);
+        double brightness = Math.abs(ray.dot(normal));
         context.setFill(Color.gray(brightness));
 
         context.fillOval(sample.getX(), sample.getY(), 5, 5);
