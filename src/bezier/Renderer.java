@@ -12,7 +12,6 @@ public class Renderer {
 
     public static void render(GraphicsContext context, State state) {
         renderCurve(context, state);
-        renderLight(context, state);
     }
 
     private static void renderCurve(GraphicsContext context, State state) {
@@ -36,12 +35,5 @@ public class Renderer {
         context.setFill(Color.gray(brightness));
 
         context.fillOval(sample.getX(), sample.getY(), 5, 5);
-    }
-
-    private static void renderLight(GraphicsContext context, State state) {
-        Vector light = state.lightProperty().get();
-
-        context.setFill(Color.YELLOW);
-        context.fillOval(light.getX(), light.getY(), 10, 10);
     }
 }
