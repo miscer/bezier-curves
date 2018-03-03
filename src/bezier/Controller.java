@@ -1,5 +1,7 @@
 package bezier;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.ObjectBinding;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,6 +16,9 @@ public class Controller implements Initializable {
     public Canvas canvas;
     public Slider samples;
     public DragPoint light;
+    public DragPoint p1;
+    public DragPoint p2;
+    public DragPoint p3;
 
     private State state = new State();
 
@@ -21,9 +26,12 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         GraphicsContext context = canvas.getGraphicsContext2D();
 
-        BezierCurve curve = new BezierCurve(new Vector(20, 300), new Vector(300, -300), new Vector(580, 300));
+        ObjectBinding<BezierCurve> curve = Bindings.createObjectBinding(
+                () -> new BezierCurve(p1.getPosition(), p2.getPosition(), p3.getPosition()),
+                p1.positionProperty(), p2.positionProperty(), p3.positionProperty()
+        );
 
-        state.curveProperty().set(curve);
+        state.curveProperty().bind(curve);
         state.lightProperty().bind(light.positionProperty());
         state.samplesProperty().bind(samples.valueProperty());
 
@@ -34,10 +42,5 @@ public class Controller implements Initializable {
             Renderer.render(context, state);
         });
     }
-
-    public void onMouseClicked(MouseEvent mouseEvent) {
-        System.out.printf("Mouse clicked %f %f\n", mouseEvent.getX(), mouseEvent.getY());
-    }
-
 
 }

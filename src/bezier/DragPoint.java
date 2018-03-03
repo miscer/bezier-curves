@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
 public class DragPoint extends Circle {
@@ -16,18 +17,23 @@ public class DragPoint extends Circle {
 
     private void initialize() {
         DoubleBinding x = Bindings.createDoubleBinding(() -> position.get().getX(), position);
-        centerXProperty().bind(x);
+        layoutXProperty().bind(x);
 
         DoubleBinding y = Bindings.createDoubleBinding(() -> position.get().getY(), position);
-        centerYProperty().bind(y);
+        layoutYProperty().bind(y);
 
         setOnMouseDragged(event -> {
-            Vector v = new Vector(event.getX(), event.getY());
-            position.set(v);
+            Point2D mousePosition = getParent().screenToLocal(event.getScreenX(), event.getScreenY());
+            Vector mouseVector = new Vector(mousePosition.getX(), mousePosition.getY());
+            position.set(mouseVector);
         });
     }
 
     public ObjectProperty<Vector> positionProperty() {
         return position;
+    }
+
+    public Vector getPosition() {
+        return position.get();
     }
 }
