@@ -15,7 +15,7 @@ public class Scene implements Observable, InvalidationListener {
 
     private ObjectProperty<BezierCurve> curve = new SimpleObjectProperty<>();
     private ObjectProperty<Vector> light = new SimpleObjectProperty<>();
-    private IntegerProperty samples = new SimpleIntegerProperty(30);
+    private IntegerProperty samples = new SimpleIntegerProperty();
 
     public Scene() {
         curve.addListener(this);
@@ -33,6 +33,18 @@ public class Scene implements Observable, InvalidationListener {
 
     public IntegerProperty samplesProperty() {
         return samples;
+    }
+
+    public BezierCurve getCurve() {
+        return curve.get();
+    }
+
+    public Vector getLight() {
+        return light.get();
+    }
+
+    public int getSamples() {
+        return samples.get();
     }
 
     @Override

@@ -1,6 +1,10 @@
 package bezier;
 
 public class Vector {
+    public static double dot(Vector a, Vector b) {
+        return a.x * b.x + a.y + b.y;
+    }
+
     private double x;
     private double y;
 
