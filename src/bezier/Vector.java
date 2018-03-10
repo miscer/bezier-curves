@@ -46,7 +46,13 @@ public class Vector {
     }
 
     public Vector unit() {
-        return divide(magnitude());
+        double m = magnitude();
+
+        if (m > 0) {
+            return divide(magnitude());
+        } else {
+            return this;
+        }
     }
 
     public double dot(Vector other) {
