@@ -19,7 +19,7 @@
     </top>
     <center>
         <Pane BorderPane.alignment="CENTER">
-            <Canvas fx:id="canvas" height="360.0" onMouseClicked="#onMouseClicked" width="600.0" />
+            <Canvas fx:id="canvas" height="360.0" width="600.0" />
             <DragPoint fx:id="light" fill="YELLOW" radius="5.0" />
             <DragPoint fx:id="p1" fill="RED" radius="5.0" />
             <DragPoint fx:id="p2" fill="RED" radius="5.0" />
