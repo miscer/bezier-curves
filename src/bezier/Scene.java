@@ -10,14 +10,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class State implements Observable, InvalidationListener {
+public class Scene implements Observable, InvalidationListener {
     private List<InvalidationListener> listeners = new ArrayList<>();
 
     private ObjectProperty<BezierCurve> curve = new SimpleObjectProperty<>();
     private ObjectProperty<Vector> light = new SimpleObjectProperty<>();
     private IntegerProperty samples = new SimpleIntegerProperty(30);
 
-    public State() {
+    public Scene() {
         curve.addListener(this);
         light.addListener(this);
         samples.addListener(this);

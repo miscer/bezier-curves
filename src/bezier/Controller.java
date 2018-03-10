@@ -6,8 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +18,7 @@ public class Controller implements Initializable {
     public DragPoint p2;
     public DragPoint p3;
 
-    private State state = new State();
+    private Scene scene = new Scene();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -31,15 +29,15 @@ public class Controller implements Initializable {
                 p1.positionProperty(), p2.positionProperty(), p3.positionProperty()
         );
 
-        state.curveProperty().bind(curve);
-        state.lightProperty().bind(light.positionProperty());
-        state.samplesProperty().bind(samples.valueProperty());
+        scene.curveProperty().bind(curve);
+        scene.lightProperty().bind(light.positionProperty());
+        scene.samplesProperty().bind(samples.valueProperty());
 
-        Renderer.render(context, state);
+        Renderer.render(context, scene);
 
-        state.addListener((observable) -> {
+        scene.addListener((observable) -> {
             Renderer.clear(context);
-            Renderer.render(context, state);
+            Renderer.render(context, scene);
         });
     }
 

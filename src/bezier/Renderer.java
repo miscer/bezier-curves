@@ -10,22 +10,22 @@ public class Renderer {
         context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    public static void render(GraphicsContext context, State state) {
-        renderCurve(context, state);
+    public static void render(GraphicsContext context, Scene scene) {
+        renderCurve(context, scene);
     }
 
-    private static void renderCurve(GraphicsContext context, State state) {
-        int samples = state.samplesProperty().get();
+    private static void renderCurve(GraphicsContext context, Scene scene) {
+        int samples = scene.samplesProperty().get();
 
         for (int i = 0; i <= samples; i++) {
             double u = (double) i / samples;
-            renderPoint(context, state, u);
+            renderPoint(context, scene, u);
         }
     }
 
-    private static void renderPoint(GraphicsContext context, State state, double u) {
-        BezierCurve curve = state.curveProperty().get();
-        Vector light = state.lightProperty().get();
+    private static void renderPoint(GraphicsContext context, Scene scene, double u) {
+        BezierCurve curve = scene.curveProperty().get();
+        Vector light = scene.lightProperty().get();
 
         Vector sample = curve.sample(u);
         Vector normal = curve.normal(u).unit();
