@@ -1,9 +1,25 @@
 package bezier;
 
+import java.util.List;
+
 public class Vector {
     public static double dot(Vector a, Vector b) {
-        return a.x * b.x + a.y + b.y;
+        return a.x * b.x + a.y * b.y;
     }
+
+    public static void sort(List<Vector> list) {
+        list.sort((u, v) -> {
+            if (u.x != v.x) {
+                return v.x > u.x ? 1 : -1;
+            } else if (u.y != v.y) {
+                return v.y > u.y ? 1 : -1;
+            } else {
+                return 0;
+            }
+        });
+    }
+
+    private final double EQUAL_DISTANCE = 0.001;
 
     private double x;
     private double y;
@@ -59,12 +75,18 @@ public class Vector {
         }
     }
 
-    public double dot(Vector other) {
-        return x * other.x + y * other.y;
-    }
-
     @Override
     public String toString() {
         return String.format("(%.3f, %.3f)", x, y);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Vector) {
+            Vector vector = (Vector)obj;
+            return Math.abs(vector.x - x) < EQUAL_DISTANCE && Math.abs(vector.y - y) < EQUAL_DISTANCE;
+        } else {
+            return super.equals(obj);
+        }
     }
 }

@@ -47,7 +47,7 @@ public class BezierCurve {
         };
     }
 
-    public Vector[] intersection(Vector l1, Vector l2) {
+    public List<Vector> intersection(Vector l1, Vector l2) {
         double[] line = CurveMath.getLineCoefficients(l1, l2);
         Vector[] curve = coefficients();
 
@@ -59,14 +59,12 @@ public class BezierCurve {
 
         List<Vector> intersections = new ArrayList<>();
 
-        for (int i = 0; i < roots.length; i++) {
-            double root = roots[i];
-
+        for (double root : roots) {
             if (root <= 1 && root >= 0) {
                 intersections.add(sample(root));
             }
         }
 
-        return intersections.toArray(new Vector[]{});
+        return intersections;
     }
 }

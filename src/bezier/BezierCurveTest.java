@@ -3,6 +3,7 @@ package bezier;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -11,17 +12,17 @@ public class BezierCurveTest {
     @Test
     public void intersectionWithVerticalLine() {
         BezierCurve curve = new BezierCurve(new Vector(-1, 0), new Vector(0, 0), new Vector(1, 0));
-        Vector[] intersections = curve.intersection(new Vector(0, -1), new Vector(0, 1));
+        List<Vector> intersections = curve.intersection(new Vector(0, -1), new Vector(0, 1));
 
-        assertEquals(1, intersections.length);
-        assertEquals(0, intersections[0].getX(), 0.1);
-        assertEquals(0, intersections[0].getY(), 0.1);
+        assertEquals(1, intersections.size());
+        assertEquals(0, intersections.get(0).getX(), 0.1);
+        assertEquals(0, intersections.get(0).getY(), 0.1);
     }
 
     @Test
     public void intersectionWithHorizontalLine() {
         BezierCurve curve = new BezierCurve(new Vector(-1, 0), new Vector(0, 1), new Vector(1, 0));
-        Vector[] intersections = curve.intersection(new Vector(-1, 0.2), new Vector(1, 0.2));
+        List<Vector> intersections = curve.intersection(new Vector(-1, 0.2), new Vector(1, 0.2));
 
 //        assertEquals(2, intersections.length);
 //        assertEquals(0, intersections[0].getX(), 0.1);
