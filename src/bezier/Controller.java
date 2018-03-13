@@ -17,6 +17,7 @@ public class Controller implements Initializable {
     public DragPoint p1;
     public DragPoint p2;
     public DragPoint p3;
+    public DragPoint p4;
 
     private Scene scene = new Scene();
 
@@ -25,8 +26,8 @@ public class Controller implements Initializable {
         GraphicsContext context = canvas.getGraphicsContext2D();
 
         ObjectBinding<BezierCurve> curve = Bindings.createObjectBinding(
-                () -> new BezierCurve(p1.getPosition(), p2.getPosition(), p3.getPosition()),
-                p1.positionProperty(), p2.positionProperty(), p3.positionProperty()
+                () -> new BezierCurve(p1.getPosition(), p2.getPosition(), p3.getPosition(), p4.getPosition()),
+                p1.positionProperty(), p2.positionProperty(), p3.positionProperty(), p4.positionProperty()
         );
 
         scene.curveProperty().bind(curve);

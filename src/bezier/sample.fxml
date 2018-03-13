@@ -24,6 +24,7 @@
             <DragPoint fx:id="p1" fill="RED" radius="5.0" />
             <DragPoint fx:id="p2" fill="RED" radius="5.0" />
             <DragPoint fx:id="p3" fill="RED" radius="5.0" />
+            <DragPoint fx:id="p4" fill="RED" radius="5.0" />
         </Pane>
     </center>
 </BorderPane>
