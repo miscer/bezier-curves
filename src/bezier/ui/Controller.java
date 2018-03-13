@@ -1,5 +1,9 @@
-package bezier;
+package bezier.ui;
 
+import bezier.curves.BezierCurve;
+import bezier.curves.CubicBezierCurve;
+import bezier.curves.QuadraticBezierCurve;
+import bezier.math.Vector;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.fxml.Initializable;

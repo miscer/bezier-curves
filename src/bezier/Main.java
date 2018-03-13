@@ -1,5 +1,6 @@
 package bezier;
 
+import bezier.ui.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +15,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
         FXMLLoader loader = new FXMLLoader();
 
-        Parent root = loader.load(getClass().getResource("sample.fxml").openStream());
+        Parent root = loader.load(getClass().getResource("scene.fxml").openStream());
         controller = loader.getController();
 
         stage.setTitle("CS4102");

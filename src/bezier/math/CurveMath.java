@@ -1,4 +1,4 @@
-package bezier;
+package bezier.math;
 
 public class CurveMath {
     public static double[] getLineCoefficients(Vector p1, Vector p2) {

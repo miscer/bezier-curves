@@ -1,4 +1,4 @@
-package bezier;
+package bezier.math;
 
 import java.util.List;
 

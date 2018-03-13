@@ -1,5 +1,6 @@
-package bezier;
+package bezier.ui;
 
+import bezier.math.Vector;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.ObjectProperty;

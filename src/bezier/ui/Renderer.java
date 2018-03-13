@@ -1,10 +1,11 @@
-package bezier;
+package bezier.ui;
 
+import bezier.curves.BezierCurve;
+import bezier.math.Vector;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Renderer {

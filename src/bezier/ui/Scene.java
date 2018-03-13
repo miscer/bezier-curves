@@ -1,5 +1,7 @@
-package bezier;
+package bezier.ui;
 
+import bezier.curves.BezierCurve;
+import bezier.math.Vector;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;

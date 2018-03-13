@@ -1,4 +1,6 @@
-package bezier;
+package bezier.curves;
+
+import bezier.math.Vector;
 
 import java.util.List;
 
