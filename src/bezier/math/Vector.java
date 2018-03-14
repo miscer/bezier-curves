@@ -3,10 +3,20 @@ package bezier.math;
 import java.util.List;
 
 public class Vector {
+    /**
+     * Calculates the dot product of two vectors
+     * @param a First vector
+     * @param b Second vector
+     * @return Dot product
+     */
     public static double dot(Vector a, Vector b) {
         return a.x * b.x + a.y * b.y;
     }
 
+    /**
+     * Sorts vectors that are on one line
+     * @param list List of vectors to be sorted
+     */
     public static void sort(List<Vector> list) {
         list.sort((u, v) -> {
             if (u.x != v.x) {

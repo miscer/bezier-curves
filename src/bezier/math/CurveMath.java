@@ -1,6 +1,12 @@
 package bezier.math;
 
 public class CurveMath {
+    /**
+     * Calculates the coefficients of a general form line equation (ax + by + c = 0)
+     * @param p1 A point on the line
+     * @param p2 Another point on the line
+     * @return Array containing the values of a, b and c
+     */
     public static double[] getLineCoefficients(Vector p1, Vector p2) {
         double a = p1.getY() - p2.getY();
         double b = p2.getX() - p1.getX();
@@ -9,6 +15,13 @@ public class CurveMath {
         return new double[]{a, b, c};
     }
 
+    /**
+     * Calculates the real roots of a quadratic equation
+     * @param a First coefficient
+     * @param b Second coefficient
+     * @param c Third coefficient
+     * @return Array of all roots
+     */
     public static double[] getQuadraticEquationRoots(double a, double b, double c) {
         double discriminant = Math.pow(b, 2) - 4 * a * c;
 
@@ -27,8 +40,15 @@ public class CurveMath {
     }
 
     /**
+     * Calculates the real roots of a cubic equation
+     *
      * Code taken from Parallel Java Library by Alan Kaminsky
      * https://www.cs.rit.edu/~ark/pj.shtml
+     * @param a First coefficient
+     * @param b Second coefficient
+     * @param c Third coefficient
+     * @param d Fourth coefficient
+     * @return Array of all roots
      */
     public static double[] getCubicEquationRoots(double a, double b, double c, double d) {
         // Verify preconditions.

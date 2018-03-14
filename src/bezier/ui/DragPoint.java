@@ -34,11 +34,15 @@ public class DragPoint extends Circle {
     }
 
     private void initialize() {
+        // bind the layout position to the position vector property
+
         DoubleBinding x = Bindings.createDoubleBinding(() -> position.get().getX(), position);
         layoutXProperty().bind(x);
 
         DoubleBinding y = Bindings.createDoubleBinding(() -> position.get().getY(), position);
         layoutYProperty().bind(y);
+
+        // update the position vector property when the point is dragged
 
         setOnMouseDragged(event -> {
             Point2D mousePosition = getParent().screenToLocal(event.getScreenX(), event.getScreenY());

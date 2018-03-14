@@ -44,11 +44,14 @@ public class Renderer {
     private static boolean isIlluminated(Scene scene, Vector point) {
         Vector light = scene.getLight();
 
+        // find all intersection points and add the light point
         List<Vector> points = scene.getCurve().intersection(light, point);
         points.add(light);
 
+        // sort the points on the line from the light to the point
         Vector.sort(points);
 
+        // check if the light and the point are next to each other and there is no other point between them
         int lightIndex = points.indexOf(light);
         int pointIndex = points.indexOf(point);
 

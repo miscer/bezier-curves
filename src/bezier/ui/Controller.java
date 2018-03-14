@@ -36,15 +36,19 @@ public class Controller implements Initializable {
 
         createPoints();
 
+        // recreate points when curve type is changed
         type.selectedToggleProperty().addListener(observable -> {
             cleanUpPoints();
             createPoints();
         });
 
+        // update scene when number of samples is changed
         scene.samplesProperty().bind(samples.valueProperty());
 
+        // render initial scene
         Renderer.render(context, scene);
 
+        // re-render the scene when something changes
         scene.addListener((observable) -> {
             Renderer.clear(context);
             Renderer.render(context, scene);
@@ -62,6 +66,7 @@ public class Controller implements Initializable {
 
             container.getChildren().addAll(p1, p2, p3, light);
 
+            // binding translating the positions of control points to a quadratic curve
             curve = Bindings.createObjectBinding(
                     () -> new QuadraticBezierCurve(p1.getPosition(), p2.getPosition(), p3.getPosition()),
                     p1.positionProperty(), p2.positionProperty(), p3.positionProperty()
@@ -77,12 +82,14 @@ public class Controller implements Initializable {
 
             container.getChildren().addAll(p1, p2, p3, p4, light);
 
+            // binding translating the positions of control points to a cubic curve
             curve = Bindings.createObjectBinding(
                     () -> new CubicBezierCurve(p1.getPosition(), p2.getPosition(), p3.getPosition(), p4.getPosition()),
                     p1.positionProperty(), p2.positionProperty(), p3.positionProperty(), p4.positionProperty()
             );
         }
 
+        // update the scene when theh curve or the light position changes
         scene.curveProperty().bind(curve);
         scene.lightProperty().bind(light.positionProperty());
     }
