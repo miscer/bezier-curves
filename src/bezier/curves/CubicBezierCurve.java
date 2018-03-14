@@ -33,6 +33,8 @@ public class CubicBezierCurve extends BezierCurve {
 
     @Override
     public Vector tangent(double u) {
+        // -3 * (1-u)^2 * p1 + 3 * (3u^2 - 4u + 1) * p2 + 3 * (-3u^2 + 2u) * p3 + 3u^2 * p4
+        
         Vector a = p1.multiply(-3 * Math.pow(1 - u, 2));
         Vector b = p2.multiply(3 * (3 * Math.pow(u, 2) - 4 * u + 1));
         Vector c = p3.multiply(3 * (-3 * Math.pow(u, 2) + 2 * u));
