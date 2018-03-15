@@ -7,7 +7,7 @@ numbersections: true
 
 # Introduction
 
-In this practical my task is to implement a simple Java application with a GUI that lets the user define and sample Bézier curves. Each point on the curve is illuminated by a single point light, accounting for self-occlusion.
+In this practical, my task is to implement a simple Java application with a GUI that lets the user define and sample Bézier curves. Each point on the curve is illuminated by a single point light, accounting for self-occlusion.
 
 My application supports both quadratic and cubic bezier curves. The user can select which type they wish to use.
 
@@ -15,7 +15,7 @@ My application supports both quadratic and cubic bezier curves. The user can sel
 
 ## Vectors
 
-Vectors are represented with instances of the `Vector` class. This class contains methods for arithmetic (add, subtract, multiply, divide), calculating the length of a vector, converting to an unit vector and calculating a dot product.
+Vectors are represented with instances of the `Vector` class. This class contains methods for arithmetic (add, subtract, multiply, divide), calculating the length of a vector, converting to a unit vector and calculating a dot product.
 
 ## Bézier Curves
 
@@ -77,25 +77,25 @@ $$a x(u) + b y(u) + c = 0$$
 
 where $x(u)$ and $y(u)$ are x and y coordinates of a point on the line at $u$.
 
-By expanding the equation I obtained a quadratic or cubic equation. To find the intersection points, I calculated the roots of these equations and sampled the curve for each root in range $[0, 1]$ (ignoring any intersection point that is not on the curve).
+By expanding the equation I obtained a quadratic or cubic equation. To find the intersection points, I calculated the roots of these equations and sampled the curve for each root in the range $[0, 1]$ (ignoring any intersection point that is not on the curve).
 
 ## Illumination
 
-For illumination, I used the calculation from the practical specification: the dot product of the curve unit normal vector and the unit vector in the direction from the sampled point to the light. The result of the dot product is a value between -1 and 1. I simply take the absolute value (so that the curve can be illuminated from both sides) and create a grayscale value from 0 to 255.
+For illumination, I used the calculation from the practical specification: the dot product of the curve unit normal vector and the unit vector in the direction from the sampled point to the light. The result of the dot product is a value between -1 and 1. I simply take the absolute value (so that the curve can be illuminated from both sides) and create a greyscale value from 0 to 255.
 
-To account for self-occlusion, first I calculate the intersection between the line from the point to the light source and the curve, using the method described before. This results in a list of points on the curve that cross the line. I add the point of the light source to the list and sort the points by their $(x, y)$ values. Since all these points are on a single line, this results in the ordering in which the points are on the line.
+To account for self-occlusion, first I calculate the intersection between the line from the point to the light source and the curve, using the method described before. This results in a list of points on the curve that crosses the line. I add the point of the light source to the list and sort the points by their $(x, y)$ values. Since all these points are on a single line, this results in the ordering in which the points are on the line.
 
 For example, if we have points $p_1$, $p_2$ and $p_3$ shown in Figure \ref{fig:sorted_vectors}, the sorted list would contain the points in the order $(p_1, p_2, p_3)$.
 
 ![Points on a line](images/sorted_vectors.png){#fig:sorted_vectors}
 
-Next, I find the index of the current sampled point in the list of points and the index of the light source point. Finally, to find out if the point is illuminator or occluded, I check the difference between the indexes. If it is 1, it means that there is no other point between and the sampled point is illuminated.
+Next, I find the index of the current sampled point in the list of points and the index of the light source point. Finally, to find out if the point is illuminator or occluded, I check the difference between the indexes. If it is 1, it means that there is no other point between them and the sampled point is illuminated.
 
 Using this method would let me have any number of curves and still calculate the occlusion. Instead of intersection points of just one curve, the points of all curves would be used in the algorithm.
 
 ## User Interface
 
-I used JavaFX for implementing the GUI of the application. The state of the application, including the number of samples and positions of the control points and the light source is stored in the `Scene` class using observable JavaFX properties.
+I used JavaFX for implementing the GUI of the application. The state of the application, including the number of samples and positions of the control points and the light source, is stored in the `Scene` class using observable JavaFX properties.
 
 The UI controls are implemented using native JavaFX components and my custom `DragPoint` component. Its role is to render a circle on the screen and respond to mouse drag events. When the point is dragged by clicking and holding the mouse button, it updates its position property. Drag points are used for curve control points and the light source.
 
@@ -123,4 +123,4 @@ I implemented an application that meets all basic requirements. The user is able
 
 As an extension, I implemented an option to use cubic Bézier curves instead of quadratic curves. I also designed the application so that it would be possible to extend it with drawing multiple curves. The illumination and occlusion calculation is able to handle any number of curves. Unfortunately, I did not have time to implement the GUI for multiple curves.
 
-I found this practical challenging as I needed to derive formulas to calculate the tangents and intersection points. However, it helped me better understand how and Bézier curves and illumination models work.
+I found this practical challenging as I needed to derive formulas to calculate the tangents and intersection points. However, it helped me better understand how Bézier curves and illumination models work.
